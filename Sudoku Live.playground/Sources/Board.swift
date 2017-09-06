@@ -6,7 +6,7 @@ public struct Board: CustomStringConvertible {
     public var rows: [[Cell]]
     
     public init(boardString: String) {
-        let characters = Array(boardString.characters)
+        let characters = Array(boardString)
         self.rows = (0..<9)
             .map({ rowIndex in
                 return characters[rowIndex*9..<rowIndex*9+9]
