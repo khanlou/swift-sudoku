@@ -24,7 +24,17 @@ do {
 }
 
 do { //hard
-    let boardString = "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......"
+    let boardString = """
+        4.....8.5
+        .3.......
+        ...7.....
+        .2.....6.
+        ....8.4..
+        ....1....
+        ...6.3.7.
+        5..2.....
+        1.4......
+        """
     let board = Board(boardString: boardString)
     let solver = Solver(board: board)
 
