@@ -31,7 +31,7 @@ public class Solver {
                     foundSomethingThisIteration = true
                 }
 
-                try? board.update(index: offset, values: possibleValues)
+                board.update(index: offset, values: possibleValues)
             }
 
             if !foundSomethingThisIteration {
@@ -54,12 +54,10 @@ public class Solver {
 
         for value in cell.values {
             var copy = board
-            do {
-                try copy.update(index: offset, values: [value])
-            } catch {
-                if error is ConsistencyError {
-                    continue
-                }
+            if board.canUpdate(index: offset, toValue: value) {
+                copy.update(index: offset, values: [value])
+            } else {
+                continue
             }
 
             let solver = Solver(board: copy)

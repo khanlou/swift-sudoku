@@ -68,12 +68,7 @@ public struct Board: CustomStringConvertible {
             && !self.box(forIndex: index).contains(.settled(value))
     }
     
-    public mutating func update(index: Int, values: [Int]) throws {
-        if values.count == 1,
-            let value = values.first,
-            !self.canUpdate(index: index, toValue: value) {
-            throw ConsistencyError()
-        }
+    public mutating func update(index: Int, values: [Int]) {
         let newCell = Cell(values: values)
         let rowIndex = index / 9
         let columnIndex = index % 9
