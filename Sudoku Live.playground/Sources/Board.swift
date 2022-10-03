@@ -24,8 +24,8 @@ public struct Board: CustomStringConvertible {
             })
     }
     
-    public var cells: [Cell] {
-        return Array(rows.joined())
+    public var cells: some Collection<Cell> {
+        return rows.joined()
     }
     
     public var description: String {
@@ -40,19 +40,19 @@ public struct Board: CustomStringConvertible {
         return self.cells.all({ $0.isSettled })
     }
     
-    public func row(forIndex index: Int) -> [Cell] {
+    public func row(forIndex index: Int) -> some Collection<Cell> {
         let rowIndex = index / 9
         return rows[rowIndex]
     }
     
-    public func column(forIndex index: Int) -> [Cell] {
+    public func column(forIndex index: Int) -> some Collection<Cell> {
         let columnIndex = index % 9
-        return self.rows.map({ row in
+        return self.rows.lazy.map({ row in
             return row[columnIndex]
         })
     }
     
-    public func box(forIndex index: Int) -> [Cell] {
+    public func box(forIndex index: Int) -> some Collection<Cell> {
         let rowIndex = index / 9
         let columnIndex = index % 9
         let boxColumnIndex = columnIndex / 3
