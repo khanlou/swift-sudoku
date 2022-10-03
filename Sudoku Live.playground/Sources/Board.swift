@@ -12,13 +12,13 @@ public struct Board: CustomStringConvertible {
                 return characters[rowIndex*9..<rowIndex*9+9]
             })
             .map({ rawRow in
-                return rawRow.map({ character in
+                return rawRow.compactMap({ character in
                     if character == "." {
                         return Cell.anything()
                     } else if let value = Int(String(character)) {
                         return Cell.settled(value)
                     } else {
-                        fatalError()
+                        return nil
                     }
                 })
             })
