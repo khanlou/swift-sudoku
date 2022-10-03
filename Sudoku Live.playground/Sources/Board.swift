@@ -37,7 +37,7 @@ public struct Board: CustomStringConvertible {
     }
     
     public var isSolved: Bool {
-        return self.cells.all({ $0.isSettled })
+        return self.cells.allSatisfy({ $0.isSettled })
     }
     
     public func row(forIndex index: Int) -> some Collection<Cell> {
