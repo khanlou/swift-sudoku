@@ -18,7 +18,7 @@ do {
     
     print(board)
     solver.isSolved
-    solver.solve()
+    try solver.solve()
     solver.isSolved
     print(solver.board)
 }
@@ -31,7 +31,7 @@ do { //hard
     let date = Date()
     print(board)
     solver.isSolved
-    solver.bruteForce()
+    try solver.bruteForce()
     solver.isSolved
     print(Date().timeIntervalSince(date))
 

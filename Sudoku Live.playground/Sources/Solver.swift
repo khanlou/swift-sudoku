@@ -1,5 +1,9 @@
 import Foundation
 
+public struct InvalidBoard: Error {
+
+}
+
 public class Solver {
     public var board: Board
     
@@ -11,7 +15,7 @@ public class Solver {
         return board.isSolved
     }
     
-    public func solve() {
+    public func solve() throws {
         while !isSolved {
             var foundSomethingThisIteration = false
             for (offset, cell) in board.cells.enumerated() {
@@ -24,7 +28,7 @@ public class Solver {
                 })
 
                 if possibleValues.isEmpty {
-                    return // something has gone really wrong
+                    throw InvalidBoard()
                 }
 
                 if possibleValues.count == 1 {
@@ -40,8 +44,8 @@ public class Solver {
         }
     }
 
-    public func bruteForce() {
-        self.solve()
+    public func bruteForce() throws {
+        try self.solve()
 
         if isSolved {
             return
@@ -54,17 +58,17 @@ public class Solver {
 
         for value in cell.values {
             var copy = board
-            if board.canUpdate(index: offset, toValue: value) {
-                copy.update(index: offset, values: [value])
-            } else {
-                continue
-            }
+            copy.update(index: offset, values: [value])
 
-            let solver = Solver(board: copy)
-            solver.bruteForce()
-            if solver.isSolved {
-                self.board = solver.board
-                return
+            do {
+                let solver = Solver(board: copy)
+                try solver.bruteForce()
+                if solver.isSolved {
+                    self.board = solver.board
+                    return
+                }
+            } catch is InvalidBoard {
+
             }
         }
     }

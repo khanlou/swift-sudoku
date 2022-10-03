@@ -75,11 +75,3 @@ public struct Board: CustomStringConvertible {
         self.rows[rowIndex][columnIndex] = newCell
     }
 }
-
-public struct ConsistencyError: Error {
-    
-}
-
-
-
-
