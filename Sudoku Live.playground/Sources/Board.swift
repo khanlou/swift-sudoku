@@ -57,7 +57,7 @@ public struct Board: CustomStringConvertible {
         let columnIndex = index % 9
         let boxColumnIndex = columnIndex / 3
         let boxRowIndex = rowIndex / 3
-        return (0..<3).flatMap({ rowOffset in
+        return (0..<3).lazy.flatMap({ rowOffset in
             return self.rows[boxRowIndex*3+rowOffset][boxColumnIndex*3..<boxColumnIndex*3+3]
         })
     }
