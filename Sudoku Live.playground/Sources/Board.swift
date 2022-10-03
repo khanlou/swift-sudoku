@@ -52,20 +52,20 @@ public struct Board: CustomStringConvertible {
         })
     }
     
-    public func minigrid(forIndex index: Int) -> [Cell] {
+    public func box(forIndex index: Int) -> [Cell] {
         let rowIndex = index / 9
         let columnIndex = index % 9
-        let minigridColumnIndex = columnIndex / 3
-        let minigridRowIndex = rowIndex / 3
+        let boxColumnIndex = columnIndex / 3
+        let boxRowIndex = rowIndex / 3
         return (0..<3).flatMap({ rowOffset in
-            return self.rows[minigridRowIndex*3+rowOffset][minigridColumnIndex*3..<minigridColumnIndex*3+3]
+            return self.rows[boxRowIndex*3+rowOffset][boxColumnIndex*3..<boxColumnIndex*3+3]
         })
     }
     
     public func canUpdate(index: Int, toValue value: Int) -> Bool {
         return !self.row(forIndex: index).contains(.settled(value))
             && !self.column(forIndex: index).contains(.settled(value))
-            && !self.minigrid(forIndex: index).contains(.settled(value))
+            && !self.box(forIndex: index).contains(.settled(value))
     }
     
     public mutating func update(index: Int, values: [Int]) throws {
